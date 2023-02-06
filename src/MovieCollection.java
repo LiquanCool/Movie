@@ -181,24 +181,31 @@ public class MovieCollection
             castPeople = movies.get(i).getCast().split("|");
             for (int j = 0; i<castPeople.length;i++)
             {
+                boolean yes = false;
                 for (int k = 0; i<cast.size();i++)
                 {
-                    if(castPeople[j]==-1)
+                    if(castPeople[j].indexOf(cast.get(k))!=-1)
                     {
-
+                        yes = true;
                     }
                 }
+                if (!yes)
+                {
+                    cast.add(castPeople[i]);
+                }
             }
-
+        }
+        ArrayList<String> searchedCast = new ArrayList<String>();
+        for (int i = 0; i < cast.size(); i++)
+        {
 
         }
-
         for (int i = 0; i < movies.size(); i++)
         {
-            String movieTitle = movies.get(i).getKeywords();
-            movieTitle = movieTitle.toLowerCase();
+            String movieCast = movies.get(i).getCast();
+            movieCast = movieCast.toLowerCase();
 
-            if (movieTitle.indexOf(searchTerm) != -1)
+            if (movieCast.indexOf(searchTerm) != -1)
             {
                 //add the Movie objest to the results list
                 results.add(movies.get(i));
