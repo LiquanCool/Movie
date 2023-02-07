@@ -236,28 +236,30 @@ public class MovieCollection
             castPeople = movies.get(i).getCast().split("\\|");
             for (int j = 0; i<castPeople.length;i++)
             {
-                boolean yes = false;
-                for (int k = 0; i<cast.size();i++)
+                if (castPeople[j].contains(selectedActor))
                 {
-                    if(castPeople[j].indexOf(cast.get(k))!=-1)
-                    {
-                        yes = true;
-                    }
-                }
-                if (!yes)
-                {
-                    cast.add(castPeople[i]);
+                    resultMovies.add(movies.get(i));
                 }
             }
+        }
+        sortResults(resultMovies);
+
+        // now, display them all to the user
+        for (int i = 0; i < resultMovies.size(); i++)
+        {
+            Movie movie = resultMovies.get(i);
+
+            // this will print index 0 as choice 1 in the results list; better for user!
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + movie);
         }
 
 
 
 
 
-
-
-        Movie selectedMovie = results.get(choice - 1);
+        Movie selectedMovie = resultMovies.get(choice - 1);
 
         displayMovieInfo(selectedMovie);
 
