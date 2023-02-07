@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MovieCollection
@@ -171,7 +172,7 @@ public class MovieCollection
         searchTerm = searchTerm.toLowerCase();
 
         // arraylist to hold search results
-        ArrayList<Movie> results = new ArrayList<Movie>();
+        ArrayList<String> results = new ArrayList<String>();
 
         ArrayList<String> cast = new ArrayList<String>();
         // search through ALL movies in collection
@@ -198,32 +199,27 @@ public class MovieCollection
         ArrayList<String> searchedCast = new ArrayList<String>();
         for (int i = 0; i < cast.size(); i++)
         {
-
-        }
-        for (int i = 0; i < movies.size(); i++)
-        {
-            String movieCast = movies.get(i).getCast();
-            movieCast = movieCast.toLowerCase();
-
-            if (movieCast.indexOf(searchTerm) != -1)
+            String castMember = cast.get(i);
+            castMember = castMember.toLowerCase();
+            if (castMember.indexOf(searchTerm)!=-1)
             {
-                //add the Movie objest to the results list
-                results.add(movies.get(i));
+                results.add(cast.get(i));
             }
         }
 
+
         // sort the results by title
-        sortResults(results);
+        Collections.sort(results);
 
         // now, display them all to the user
         for (int i = 0; i < results.size(); i++)
         {
-            String keyword = results.get(i).getKeywords();
+            String actor = results.get(i);
 
             // this will print index 0 as choice 1 in the results list; better for user!
             int choiceNum = i + 1;
 
-            System.out.println("" + choiceNum + ". " + keyword);
+            System.out.println("" + choiceNum + ". " + actor);
         }
 
         System.out.println("Which movie would you like to learn more about?");
