@@ -179,7 +179,7 @@ public class MovieCollection
         for (int i = 0; i < movies.size(); i++)
         {
             String[] castPeople;
-            castPeople = movies.get(i).getCast().split("|");
+            castPeople = movies.get(i).getCast().split("\\|");
             for (int j = 0; i<castPeople.length;i++)
             {
                 boolean yes = false;
@@ -222,11 +222,40 @@ public class MovieCollection
             System.out.println("" + choiceNum + ". " + actor);
         }
 
-        System.out.println("Which movie would you like to learn more about?");
+        System.out.println("Which cast member would you like to learn more about?");
         System.out.print("Enter number: ");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
+
+        String selectedActor = results.get(choice-1);
+        ArrayList<Movie> resultMovies = new ArrayList<Movie>();
+        for (int i = 0; i < movies.size(); i++)
+        {
+            String[] castPeople;
+            castPeople = movies.get(i).getCast().split("\\|");
+            for (int j = 0; i<castPeople.length;i++)
+            {
+                boolean yes = false;
+                for (int k = 0; i<cast.size();i++)
+                {
+                    if(castPeople[j].indexOf(cast.get(k))!=-1)
+                    {
+                        yes = true;
+                    }
+                }
+                if (!yes)
+                {
+                    cast.add(castPeople[i]);
+                }
+            }
+        }
+
+
+
+
+
+
 
         Movie selectedMovie = results.get(choice - 1);
 
