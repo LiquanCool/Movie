@@ -469,7 +469,38 @@ public class MovieCollection
 
     private void listHighestRevenue()
     {
+// arraylist to hold search results
+        ArrayList<Movie> results = new ArrayList<Movie>();
+        // search through ALL movies in collection
+        for (int i = 0; i < 50; i++)
+        {
+            results.add(movies.get(i));
+        }
 
+        // now, display them all to the user
+        for (int i = 0; i < results.size(); i++)
+        {
+            Movie movie = results.get(i);
+
+            // this will print index 0 as choice 1 in the results list; better for user!
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + movie.getTitle() + " " + movie.getRevenue());
+        }
+
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+
+        Movie selectedMovie = results.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void importMovieList(String fileName)
