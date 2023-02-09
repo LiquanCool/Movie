@@ -413,38 +413,37 @@ public class MovieCollection
 
     private void listHighestRated()
     {
-        // arraylist to hold search results
-        ArrayList<Movie> results = new ArrayList<Movie>();
-        // search through ALL movies in collection
-        results.add(movies.get(0));
-        for (int i = 1; i < movies.size(); i++)
+        ArrayList<Double> results = new ArrayList<Double>();
+        for (int i = 0; i < movies.size(); i++)
         {
-            boolean used = false;
-            int c = 0;
-            while(!used && c<results.size())
+            results.add(movies.get(i).getUserRating());
+        }
+        results.sort(Double::compareTo);
+        Collections.sort(results, Collections.reverseOrder());
+
+        ArrayList<Movie> topMovies = new ArrayList<Movie>();
+        for (int i = 0; i < 50; i++)
+        {
+            boolean end = false;
+            for (int j = 0; j < movies.size()&&!end; j++)
             {
-                if (movies.get(i).getUserRating()>results.get(c).getUserRating())
+                if (movies.get(j).getUserRating() == results.get(i)||end)
                 {
-                    used=true;
-                    if (results.size()<50)
+                    if (topMovies.indexOf(movies.get(j)) == -1)
                     {
-                        results.add(c,movies.get(i));
-                    }
-                    else
-                    {
-                        results.set(c,movies.get(i));
+                        topMovies.add(movies.get(j));
+                        end = true;
                     }
                 }
-                c++;
             }
         }
 
 
 
         // now, display them all to the user
-        for (int i = 0; i < results.size(); i++)
+        for (int i = 0; i < topMovies.size(); i++)
         {
-            Movie movie = results.get(i);
+            Movie movie = topMovies.get(i);
 
             // this will print index 0 as choice 1 in the results list; better for user!
             int choiceNum = i + 1;
@@ -459,7 +458,7 @@ public class MovieCollection
         scanner.nextLine();
 
 
-        Movie selectedMovie = results.get(choice - 1);
+        Movie selectedMovie = topMovies.get(choice - 1);
 
         displayMovieInfo(selectedMovie);
 
