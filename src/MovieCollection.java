@@ -306,7 +306,7 @@ public class MovieCollection
             // this will print index 0 as choice 1 in the results list; better for user!
             int choiceNum = i + 1;
 
-            System.out.println("" + choiceNum + ". " + keyword);
+            System.out.println("" + choiceNum + ". " + results.get(i).getTitle());
         }
 
         System.out.println("Which movie would you like to learn more about?");
